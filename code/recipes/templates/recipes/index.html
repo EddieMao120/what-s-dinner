@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe Finder</title>
+</head>
+<body>
+<h1>Find Recipes by Ingredients</h1>
+<form method="get">
+    {{ form.as_p }}
+    <button type="submit">Search</button>
+</form>
+
+{% if recipes %}
+    <h2>Recipes you can make</h2>
+    <ul>
+        {% for recipe in recipes %}
+            <li>
+                <strong>{{ recipe.name }}</strong><br/>
+                <em>Ingredients:</em> {{ recipe.ingredients.all|join:", " }}<br/>
+                <p>{{ recipe.instructions }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% elif recipes is not none %}
+    <p>No matching recipes found.</p>
+{% endif %}
+</body>
+</html>
